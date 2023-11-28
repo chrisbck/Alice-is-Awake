@@ -3,7 +3,7 @@ using System;
 static public class PWCodeGenerator
 {
 
-    static public (byte, uint) Generate(Species speciesOwned, Careers careersOwned, SoulScores spiritScores, uint totalNFTs)
+    static public (byte, uint) Generate(Species speciesOwned, Careers careersOwned, SpiritScores spiritScores, uint totalNFTs)
     {
         uint code = 0;
         byte checksum;
@@ -53,17 +53,17 @@ static public class PWCodeGenerator
         return tempByte;
     }
 
-    static private uint EncodeSpiritScores(SoulScores soulScores)
+    static private uint EncodeSpiritScores(SpiritScores spiritScores)
     {
         uint temp32Bits = 0;
 
-        temp32Bits = soulScores.Strength;
+        temp32Bits = spiritScores.Strength;
         temp32Bits = temp32Bits << 4;
-        temp32Bits += soulScores.Intelligence;
+        temp32Bits += spiritScores.Intelligence;
         temp32Bits = temp32Bits << 4;
-        temp32Bits += soulScores.WillPower;
+        temp32Bits += spiritScores.WillPower;
         temp32Bits = temp32Bits << 4;
-        temp32Bits += soulScores.Dexterity;
+        temp32Bits += spiritScores.Dexterity;
 
         return temp32Bits;
     }
