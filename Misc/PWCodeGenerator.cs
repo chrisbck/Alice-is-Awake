@@ -1,47 +1,15 @@
-/*
-    Encode PW NFT and soul data into 32bit value with checksum
-*/
-
 using System;
-
-
-public struct Species
-{
-    public bool hasPandroid;
-    public bool hasCyborg;
-    public bool hasSpectre;
-    public bool hasXGene;
-    public bool hasLegendary;
-    public bool hasMagic;
-}
-
-public struct Careers
-{
-    public bool hasHacker;
-    public bool hasTrader;
-    public bool hasWarrior;
-    public bool hasDruid;
-}
-
-public struct SoulScores
-{
-    public uint Intelligence;
-    public uint Dexterity;
-    public uint Strength;
-    public uint WillPower;
-}
-
 
 static public class PWCodeGenerator
 {
 
-    static public (byte, uint) Generate(Species speciesOwned, Careers careersOwned, SoulScores soulScores, uint totalNFTs)
+    static public (byte, uint) Generate(Species speciesOwned, Careers careersOwned, SoulScores spiritScores, uint totalNFTs)
     {
         uint code = 0;
         byte checksum;
 
-        code = EncodeSoulScores(soulScores);
-        code = code << 8;      // Shift bits 16 spaces left
+        code = EncodeSpiritScores(spiritScores);
+        code = code << 8;      // Shift bits 8 spaces left
         code += EncodeSpeciesAndCareer(speciesOwned, careersOwned);
         code = code << 8;       // Shift bits 8 spaces left
         code += EncodeMisc(speciesOwned, totalNFTs);
@@ -83,10 +51,9 @@ static public class PWCodeGenerator
         if (speciesOwned.hasSpectre) tempByte += 8;
 
         return tempByte;
-
     }
 
-    static private uint EncodeSoulScores(SoulScores soulScores)
+    static private uint EncodeSpiritScores(SoulScores soulScores)
     {
         uint temp32Bits = 0;
 
@@ -108,10 +75,10 @@ static public class PWCodeGenerator
         byte total = 0;
 
         // Split data block into four separate blocks
-        dataChunks[0] = (byte)(dataBlock);
-        dataChunks[1] = (byte)(dataBlock >> 8);
-        dataChunks[2] = (byte)(dataBlock >> 16);
-        dataChunks[3] = (byte)(dataBlock >> 24);
+        dataChunks[3] = (byte)(dataBlock);
+        dataChunks[2] = (byte)(dataBlock >> 8);
+        dataChunks[1] = (byte)(dataBlock >> 16);
+        dataChunks[0] = (byte)(dataBlock >> 24);
 
         foreach(byte chunk in dataChunks)
             total += chunk;
