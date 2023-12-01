@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="4" height="2" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../../../../Retro/Gameboy/Dev/gbTilesets/BitsAndBobs(no_scale).tsx"/>
+ <layer id="1" name="Tile Layer 1" width="4" height="2">
+  <data encoding="csv">
+41,42,43,44,
+57,58,59,60
+</data>
+ </layer>
+</map>
